@@ -8,7 +8,7 @@ export const $secInicio= document.getElementById('inicio');
 export const $secRutas= document.getElementById('rutas');
 
 export const $subTitle= document.getElementById('nueva-ruta');
-
+export const $opcionesED= document.getElementById('opciones-rutas');
 
 export const $formAddRuta = document.getElementById('form-add-ruta');
 export const $ruta = document.getElementById('input-ruta');

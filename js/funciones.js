@@ -2,9 +2,9 @@
 import {getRutas,newRuta ,getPuntos} from '../apiConnection/API.js'
 
 //Importar selectores del DOM
-import {$ruta, $formAddRuta, $tablaRutas} from '../js/selectores.js'
+import {$ruta, $tablaRutas} from '../js/selectores.js'
 //Importar selectores del DOM
-import {$secInicio,$secRutas} from '../js/selectores.js'
+import {$secInicio,$secRutas, $subTitle, $formAddRuta,$opcionesED} from '../js/selectores.js'
 //Render las rutas
 export async function renderRutas(){
     const listaRutas = await getRutas();  
@@ -62,8 +62,31 @@ export function agregarRuta(e){
 
 //Funcionamiento de los navbar
 export function listarRutas(){
-    $secInicio.style.display = "none";
+    $secInicio.style.display = "none";    
     $secRutas.style.display = "block";
+    $formAddRuta.style.display = "none";
+    $opcionesED.style.display = "none";
+
+    $subTitle.textContent="Lista de Rutas";
+
+}
+
+export function nuevaRuta(){
+    $secInicio.style.display = "none";    
+    $secRutas.style.display = "block";
+    $formAddRuta.style.display = "block";
+    $opcionesED.style.display = "none";
+
+
+    $subTitle.textContent="Agregar nueva Ruta";
+}
+
+export function opcionesRutas(){
+    $secInicio.style.display = "none";    
+    $secRutas.style.display = "block";
+    $formAddRuta.style.display = "block";
+
+    $opcionesED.style.display = "table-cell";
 }
 
 
