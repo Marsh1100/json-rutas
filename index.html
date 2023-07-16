@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--Styles-->
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <!--Bootstrap-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+    <!-- <link rel="shortcut icon" href="img/signo-de-interrogacion.ico">-->
+    <title>Rutas</title>
+</head>
+
+<body>
+
+    <header>
+        <h1>Viajando por Colombia🛣️</h1>
+    </header>
+
+    <nav>
+        <ul class="nav nav-underline">
+            <li class="nav-item">
+                <a id="nav-rutas" class="nav-link" style="color: rgb(6, 4, 97);">Rutas</a>
+            </li>
+            <li class="nav-item">
+                <a id="nav-nueva-ruta" class="nav-link" href="#nueva-ruta" style="color: rgb(6, 4, 97);">Crear nueva
+                    ruta</a>
+            </li>
+            <li class="nav-item">
+                <a id="nav-opciones" class="nav-link" style="color: rgb(6, 4, 97);">Editar/Eliminar</a>
+            </li>
+        </ul>
+    </nav>
+
+    <main>
+        <section class="inicio" id="inicio">
+            <h2>¡Bienvenido al organizador de RUTAS!</h2>
+        </section>
+
+        <section class="sectionRutas hidden" id="rutas">
+            <h3 id="nueva-ruta">Agregar nueva ruta</h3>
+            <div id="agregar-ruta">
+                <form id="form-add-ruta" class="formRuta" method="POST">
+                    <input id="input-ruta" class="form-control form-control-sm" type="text" placeholder="Nueva ruta">
+
+                    <button type="submit" class="btn btn-success" for="form-add-ruta">Guardar</button>
+                </form>
+            </div>
+
+            <table class="table  text-center">
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col">N°</th>
+                        <th scope="col">Ruta</th>
+                        <th scope="col">Agregar punto</th>
+                        <th scope="col">Puntos📍</th>
+                        <th scope="col">Ver puntos</th>
+                        <th scope="col" id="opciones-rutas" class="hidden">Opciones</th>
+                    </tr>
+                </thead>
+                <tbody id="lista-rutas">
+                    <!--Se agregan las rutas dinámicamente-->
+                </tbody>
+            </table>
+
+        </section>
+
+    </main>
+
+
+    <!--Bootstrap-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+    <!--SweetAlert2-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!--JavaScript-->
+    <script src="js/app.js" type="module"></script>
+</body>
+
+</html>
