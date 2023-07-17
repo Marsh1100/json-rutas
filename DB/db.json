@@ -10,7 +10,7 @@
     },
     {
       "id": 1689544028010,
-      "nomRuta": "chiquinquira"
+      "nomRuta": "Chiquinquira"
     },
     {
       "id": 1689552612126,
@@ -32,13 +32,13 @@
     },
     {
       "id": 331,
-      "nomPunto": "Tunja",
+      "nomPunto": "Bosconia",
       "rutaId": 1,
       "imagen": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0e/02/bf/7d/photo0jpg.jpg?w=500&h=400&s=1"
     },
     {
       "id": 361,
-      "nomPunto": "Tunja",
+      "nomPunto": "Valledupar",
       "rutaId": 1,
       "imagen": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0e/02/bf/7d/photo0jpg.jpg?w=500&h=400&s=1"
     }

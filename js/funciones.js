@@ -1,8 +1,8 @@
 //Importar funcion método HTTP - get -Post
-import {getRutas,newRuta,editRuta,deleteRuta,getPuntos} from '../apiConnection/API.js'
+import {getRutas,newRuta,editRuta,deleteRuta,getPuntosFilter} from '../apiConnection/API.js'
 
 //Importar selectores del DOM
-import {$secInicio,$secRutas,$inputRuta,$btnRuta,$subTitle,$tablaRutas ,$formAddRuta,$opcionesED, $listBtnOpciones, $listAddPunto, $listShowPuntos} from '../js/selectores.js'
+import {$secInicio,$secRutas,$inputRuta,$btnRuta,$subTitle,$tablaRutas ,$formAddRuta, $cartsPuntosList,$btnPuntoAddList,$btnPuntoVerList, $opcionesED, $listBtnOpciones, $listAddPunto, $listShowPuntos} from '../js/selectores.js'
 
 //1.FUNCIONES DEL CRUD RUTAS
 
@@ -14,14 +14,14 @@ export async function renderRutas(){
 
     listaRutas.forEach((ruta,index)=>{
         const {id,nomRuta} = ruta;
-        //let contadorPuntos = contarPuntos(id); //Contar los puntos de cada RUTA
+        let contadorPuntos = contarPuntos(id); //Contar los puntos de cada RUTA 
         let html = `<tr>
                         <th scope="row">${index+1}</th>
                         <td>${nomRuta}</td>
                         <td>
-                            <button data-rutaa="${id}" type="button" class="addPunto bi bi-plus-square" data-bs-toggle="modal" data-bs-target="#staticBackdrop"></button>
+                            <button data-ruta="${id}" type="button" class="addPunto bi bi-plus-square" data-bs-toggle="modal" data-bs-target="#staticBackdrop"></button>
                         </td>
-                        <td>${17}</td>
+                        <td>${contadorPuntos}</td>
                         <td>
                             <button  data-ruta="${id}" data-bs-target="#p${id}" type="button" class="bi bi-eye" data-bs-toggle="collapse" aria-expanded="false" aria-controls="collapseExample"></button>
                         </td>
@@ -82,6 +82,8 @@ export function editarRuta(idRuta,posicion){
 
 //1.4 DELETE - Eliminar Ruta
     //Ver seccion 0.2
+
+
 //2.Funcionamiento de los navbar
 //2.1
 export function listarRutas(){
@@ -122,7 +124,32 @@ export function opcionesRutas(){
     habilitarBtns(true);
 }
 
+//3 FUNCIONES DE PUNTOS Create-Delete
+//3.1 Render Puntos
+async function renderPuntos(idRuta){
 
+    //Obtener solo los puntos de una ruta específica
+    let listaPuntosFilter = await getPuntosFilter(idRuta);
+    const $cartsPunto = document.getElementById(`c${idRuta}`);
+    $cartsPunto.innerHTML = " "; //Se deja vacío
+    console.log(listaPuntosFilter);
+    listaPuntosFilter.forEach(punto=>{
+        const {id,nomPunto, imagen} =punto;
+        
+        let html = `<div class="card" style="width: 18rem;">
+                            <img src="${imagen}" class="card-img-top" alt="imagen.jpg">
+                            <div class="card-body">
+                            <p class="card-text"><b>${nomPunto}</b></p>
+                            <div>
+                                <button type="button" class="btn btn-danger bi bi-trash rutas" id="${id}"></button>
+                            </div>
+                            </div>
+                        </div>`;
+        $cartsPunto.insertAdjacentHTML('beforeend', html)
+        
+    });
+    
+}
 
 //0.Otras funciones
 
@@ -168,9 +195,13 @@ export function seleccionTabla(e){
     }else if(clase.includes("bi-plus-square")){
 
     }else if(clase.includes("bi-eye")){
-
+        renderPuntos(idRuta);
     }
+}
 
+//0.3 Contador de puntos de cada Ruta
+function contarPuntos(idPuntos){
+    return "aun no cuentaxd",idPuntos
 }
 
 

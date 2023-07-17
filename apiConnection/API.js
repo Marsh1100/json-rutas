@@ -53,10 +53,10 @@ export const editRuta = async (edicion, idRuta) => {
         console.log(error);
     }
 }
-
-export const getPuntos = async () => {
+/////////////////////////////////////////////////////////////
+export const getPuntosFilter = async (idRuta) => {
     try {
-        const result = await fetch(urlPuntos);
+        const result = await fetch(`${urlPuntos}?rutaId=${idRuta}`);
         const puntos = await result.json();
         return puntos
     }catch(error){

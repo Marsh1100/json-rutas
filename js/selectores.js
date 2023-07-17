@@ -20,3 +20,7 @@ export const $tablaRutas = document.getElementById('lista-rutas');
 export const $listBtnOpciones = document.getElementsByClassName('tdOpciones');
 export const $listAddPunto = document.getElementsByClassName('bi-plus-square');
 export const $listShowPuntos = document.getElementsByClassName('bi-eye');
+
+export const $cartsPuntosList = document.getElementsByClassName('cardPuntos');
+export const $btnPuntoAddList = document.getElementsByClassName('addPunto');
+export const $btnPuntoVerList = document.getElementsByClassName('bi-eye');
