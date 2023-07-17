@@ -1,10 +1,8 @@
 //Importar funcion método HTTP - get -Post
-import {getRutas,newRuta ,deleteRuta,getPuntos} from '../apiConnection/API.js'
+import {getRutas,newRuta,editRuta,deleteRuta,getPuntos} from '../apiConnection/API.js'
 
 //Importar selectores del DOM
-import {$ruta, $tablaRutas} from '../js/selectores.js'
-//Importar selectores del DOM
-import {$secInicio,$secRutas, $subTitle, $formAddRuta,$opcionesED, $listBtnOpciones, $listAddPunto, $listShowPuntos} from '../js/selectores.js'
+import {$secInicio,$secRutas,$inputRuta,$btnRuta,$subTitle,$tablaRutas ,$formAddRuta,$opcionesED, $listBtnOpciones, $listAddPunto, $listShowPuntos} from '../js/selectores.js'
 
 //1.FUNCIONES DEL CRUD RUTAS
 
@@ -21,14 +19,14 @@ export async function renderRutas(){
                         <th scope="row">${index+1}</th>
                         <td>${nomRuta}</td>
                         <td>
-                            <button data-ruta="${id}" type="button" class="addPunto bi bi-plus-square" data-bs-toggle="modal" data-bs-target="#staticBackdrop"></button>
+                            <button data-rutaa="${id}" type="button" class="addPunto bi bi-plus-square" data-bs-toggle="modal" data-bs-target="#staticBackdrop"></button>
                         </td>
                         <td>${17}</td>
                         <td>
                             <button  data-ruta="${id}" data-bs-target="#p${id}" type="button" class="bi bi-eye" data-bs-toggle="collapse" aria-expanded="false" aria-controls="collapseExample"></button>
                         </td>
                         <td class="tdOpciones hidden">
-                            <button data-ruta="${id}" type="button" class="btn btn-warning bi bi-pencil-square"></button>
+                            <button data-ruta="${id}" type="button" class="btn btn-warning bi bi-pencil-square" data-posicion="${index}"></button>
 
                             <button data-ruta="${id}" type="button" class="btn btn-danger bi bi-trash delete"></button>
                         </td>
@@ -49,20 +47,40 @@ export async function renderRutas(){
     });
 };
 //1.2 POST - Agregar  Ruta
-export function agregarRuta(e){
+export function  agregarRuta(e){
    e.preventDefault();
 
-    const nomRuta = $ruta.value;
-    
-    //Nuevo objeto Ruta
-    const nuevaRuta ={
-        "id": Date.now(),
-        nomRuta
+    const nomRuta = $inputRuta.value;
+
+    if($btnRuta.textContent === "Guardar"){
+        //Nuevo objeto Ruta
+        const nuevaRuta ={
+            "id": Date.now(),
+            nomRuta
+        }
+        newRuta(nuevaRuta);
+    }else{
+        let idRuta = (e.target.dataset.ruta) 
+       let edicion = {"nomRuta":nomRuta};
+        editRuta(edicion,idRuta)
     }
-    newRuta(nuevaRuta);
+    
 }
 
-//1.3 --- Eliminar Ruta
+//1.3 PATCH - Editar Nombre la ruta (ver condicional 1.2)
+export function editarRuta(idRuta,posicion){
+    $formAddRuta.style.display = "block";
+    $subTitle.textContent="Edición de Ruta";
+
+    const $tdTable = document.getElementsByTagName("td");
+
+    $inputRuta.value = $tdTable[posicion].innerHTML;
+
+    $btnRuta.textContent = 'Confirmar';
+    $formAddRuta.setAttribute('data-ruta',idRuta);
+}
+
+//1.4 DELETE - Eliminar Ruta
     //Ver seccion 0.2
 //2.Funcionamiento de los navbar
 //2.1
@@ -141,10 +159,11 @@ export function seleccionTabla(e){
     let idRuta = parseInt(e.target.dataset.ruta);
 
     if(clase.includes("bi-pencil-square")){
-        console.log("editar")
+        let posicion = parseInt(e.target.dataset.posicion)*6;
+        editarRuta(idRuta,posicion)
     }else if(clase.includes("delete")){
         //Confirmar delete
-        deleteRuta(idRuta)
+        deleteRuta(idRuta);
 
     }else if(clase.includes("bi-plus-square")){
 

@@ -37,7 +37,20 @@ export const deleteRuta = async (idRuta) => {
             method: 'DELETE'
         })
     }catch(error){
-        console.log(error)
+        console.log(error);
+    }
+}
+
+//Editar una Ruta en la RESP API - Método patch
+export const editRuta = async (edicion, idRuta) => {
+    try {
+        await fetch(`${urlRutas}/${idRuta}`,{
+            method: 'PATCH',
+            body: JSON.stringify(edicion),
+            headers: {'Content-Type': 'application/json'}
+        })
+    } catch (error) {
+        console.log(error);
     }
 }
 

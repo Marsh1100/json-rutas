@@ -12,7 +12,8 @@ export const $subTitle= document.getElementById('nueva-ruta');
 export const $opcionesED= document.getElementById('opciones-rutas');
 
 export const $formAddRuta = document.getElementById('form-add-ruta');
-export const $ruta = document.getElementById('input-ruta');
+export const $inputRuta = document.getElementById('input-ruta');
+export const $btnRuta = document.getElementById('ruta'); //Agregar o Editar Ruta
 export const $tablaRutas = document.getElementById('lista-rutas');
 
 //Clases
