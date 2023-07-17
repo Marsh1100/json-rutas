@@ -8,35 +8,23 @@
     {
       "id": 2,
       "nomRuta": "Cafetera",
-      "puntos": 2
+      "puntos": 1
     },
     {
       "id": 1689602891350,
-      "nomRuta": "86",
+      "nomRuta": "Ruta 86",
       "puntos": 2
     },
     {
-      "id": 1689603151822,
-      "nomRuta": "Chiquinquira",
+      "id": 1689608665127,
+      "nomRuta": "Ruta 84",
       "puntos": 0
     }
   ],
   "puntos": [
     {
-      "id": 123,
-      "nomPunto": "Manizales",
-      "rutaId": 2,
-      "imagen": "https://www.shutterstock.com/shutterstock/photos/1647962155/display_1500/stock-photo-manizales-tourist-sites-historical-architectural-monument-of-colombia-1647962155.jpg"
-    },
-    {
       "id": 124,
       "nomPunto": "Tunja",
-      "rutaId": 1,
-      "imagen": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0e/02/bf/7d/photo0jpg.jpg?w=500&h=400&s=1"
-    },
-    {
-      "id": 125,
-      "nomPunto": "Bosconia",
       "rutaId": 1,
       "imagen": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0e/02/bf/7d/photo0jpg.jpg?w=500&h=400&s=1"
     },
@@ -68,6 +56,12 @@
       "id": 1689605108753,
       "nomPunto": "aaa",
       "rutaId": 2,
+      "imagen": "https://img.freepik.com/vector-premium/imagen-dibujos-animados-hongo-palabra-hongo_587001-200.jpg?w=2000"
+    },
+    {
+      "id": 1689608703502,
+      "nomPunto": "Punto2",
+      "rutaId": 1,
       "imagen": "https://img.freepik.com/vector-premium/imagen-dibujos-animados-hongo-palabra-hongo_587001-200.jpg?w=2000"
     }
   ]

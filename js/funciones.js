@@ -1,5 +1,5 @@
 //Importar funcion método HTTP - get -Post
-import {getRutas,newRuta,editRuta,deleteRuta,getPuntosFilter,newPunto,editPuntos} from '../apiConnection/API.js'
+import {getRutas,newRuta,editRuta,deleteRuta,getPuntosFilter,newPunto,editPuntos,deletePunto} from '../apiConnection/API.js'
 
 //Importar selectores del DOM
 import {$secInicio,$secRutas,$inputRuta,$btnRuta,$subTitle,$tablaRutas ,$formAddRuta,$modalTitle,$modalBody,$modalIdRuta,$modalNombre,$modalUrl,$formAddPunto,$cartsPuntosList,$btnPuntoAddList,$btnPuntoVerList, $opcionesED, $listBtnOpciones, $listAddPunto, $listShowPuntos} from '../js/selectores.js'
@@ -27,14 +27,14 @@ export async function renderRutas(){
                         <td class="tdOpciones hidden">
                             <button data-ruta="${id}" type="button" class="btn btn-warning bi bi-pencil-square" data-posicion="${index}"></button>
 
-                            <button data-ruta="${id}" type="button" class="btn btn-danger bi bi-trash delete"></button>
+                            <button data-ruta="${id}" type="button" class="btn btn-danger bi bi-trash delete-ruta"></button>
                         </td>
                     </tr>
 
                     <tr>
                         <td colspan="6" style="padding: 0;">
                             <div class="collapse" id="p${id}">
-                                <div class="cardPuntos" id="c${id}">
+                                <div class="cardPuntos" data-puntos="${puntos}"  id="c${id}">
                                 <!--Se añade de forma dinámica-->
                                 </div>
                             </div>
@@ -132,6 +132,8 @@ async function renderPuntos(idRuta){
     let listaPuntosFilter = await getPuntosFilter(idRuta);
     const $cartsPunto = document.getElementById(`c${idRuta}`);
     $cartsPunto.innerHTML = " "; //Se deja vacío
+    let puntos = parseInt($cartsPunto.dataset.puntos);
+
 
     listaPuntosFilter.forEach(punto=>{
         const {id,nomPunto, imagen} =punto;
@@ -141,7 +143,7 @@ async function renderPuntos(idRuta){
                             <div class="card-body">
                             <p class="card-text"><b>${nomPunto}</b></p>
                             <div>
-                                <button type="button" class="btn btn-danger bi bi-trash rutas" id="${id}"></button>
+                                <button type="button" class="btn btn-danger bi bi-trash delete-punto" id="${id}" data-ruta="${idRuta} "data-puntos="${puntos}"></button>
                             </div>
                             </div>
                         </div>`;
@@ -204,14 +206,14 @@ function habilitarBtns(habilitar){
 }
 
 //0.2 Selección de botón eliminar o editar
-export function seleccionTabla(e){
+export async function seleccionTabla(e){
     let clase = e.target.className
     let idRuta = parseInt(e.target.dataset.ruta);
 
     if(clase.includes("bi-pencil-square")){
         let posicion = parseInt(e.target.dataset.posicion)*6;
         editarRuta(idRuta,posicion)
-    }else if(clase.includes("delete")){
+    }else if(clase.includes("delete-ruta")){
         //Confirmar delete
         deleteRuta(idRuta);
 
@@ -223,6 +225,14 @@ export function seleccionTabla(e){
         formularioPunto(idRuta,posicion);
     }else if(clase.includes("bi-eye")){
         renderPuntos(idRuta);
+    }else if(clase.includes("delete-punto")){
+        let idPunto = parseInt(e.target.id);
+        let puntos = parseInt(e.target.dataset.puntos);
+
+        let editarPunto = {"puntos":puntos-1};
+        deletePunto(idPunto,idRuta,editarPunto);
+
+        
     }
 }
 

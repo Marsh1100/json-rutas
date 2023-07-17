@@ -95,3 +95,19 @@ export const newPunto = async (punto) => {
         console.log(error);
     }
 }
+
+export const deletePunto = async (idPunto,idRuta,editarPuntos) => {
+    try{
+        await fetch(`${urlPuntos}/${idPunto}`,{
+            method: 'DELETE'
+        })
+
+        await fetch(`${urlRutas}/${idRuta}`,{
+            method: 'PATCH',
+            body: JSON.stringify(editarPuntos),
+            headers: {'Content-Type': 'application/json'}
+        })
+    }catch(error){
+        console.log(error);
+    }
+}
