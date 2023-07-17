@@ -1,7 +1,7 @@
 //Importar selectores del DOM
-import { $navRutas,$navNuevaRuta,$navOpcionesRuta,$formAddRuta,$tablaRutas } from "../js/selectores.js";
+import { $navRutas,$navNuevaRuta,$navOpcionesRuta,$formAddRuta,$formAddPunto,$tablaRutas } from "../js/selectores.js";
 //Importar funciones
-import {renderRutas,listarRutas,nuevaRuta,opcionesRutas,agregarRuta,seleccionTabla} from '../js/funciones.js'
+import {renderRutas,listarRutas,nuevaRuta,opcionesRutas,agregarRuta,seleccionTabla,agregarPunto} from '../js/funciones.js'
 
 export class App {
     constructor(){
@@ -16,6 +16,7 @@ export class App {
 
         $formAddRuta.addEventListener('submit',agregarRuta);
         $tablaRutas.addEventListener('click', seleccionTabla);
+        $formAddPunto.addEventListener('submit', agregarPunto);
 
     }
 }

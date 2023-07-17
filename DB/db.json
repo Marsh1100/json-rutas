@@ -2,45 +2,51 @@
   "rutas": [
     {
       "id": 1,
-      "nomRuta": "Del solKKKKKKK"
+      "nomRuta": "Del sol"
     },
     {
       "id": 2,
       "nomRuta": "Cafetera"
     },
     {
-      "id": 1689544028010,
-      "nomRuta": "Chiquinquira"
+      "id": 1689602891350,
+      "nomRuta": "86"
     },
     {
-      "id": 1689552612126,
-      "nomRuta": "manizales"
+      "id": 1689603151822,
+      "nomRuta": "Chiquinquira"
     }
   ],
   "puntos": [
     {
-      "id": 456,
+      "id": 123,
       "nomPunto": "Manizales",
       "rutaId": 2,
       "imagen": "https://www.shutterstock.com/shutterstock/photos/1647962155/display_1500/stock-photo-manizales-tourist-sites-historical-architectural-monument-of-colombia-1647962155.jpg"
     },
     {
-      "id": 321,
+      "id": 124,
       "nomPunto": "Tunja",
       "rutaId": 1,
       "imagen": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0e/02/bf/7d/photo0jpg.jpg?w=500&h=400&s=1"
     },
     {
-      "id": 331,
+      "id": 125,
       "nomPunto": "Bosconia",
       "rutaId": 1,
       "imagen": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0e/02/bf/7d/photo0jpg.jpg?w=500&h=400&s=1"
     },
     {
-      "id": 361,
+      "id": 126,
       "nomPunto": "Valledupar",
       "rutaId": 1,
       "imagen": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0e/02/bf/7d/photo0jpg.jpg?w=500&h=400&s=1"
+    },
+    {
+      "id": 127,
+      "nomPunto": "Bogotá",
+      "rutaId": "1",
+      "imagen": "https://media.istockphoto.com/id/1182337590/es/foto/paisaje-urbano-de-bogot%C3%A1-de-grandes-edificios-y-monta%C3%B1as-y-cielo-azul.jpg?s=612x612&w=0&k=20&c=cReBobrG-O8clQZMCqnSVl9hvhn4D1QiiBdc1JHnxKo="
     }
   ]
 }

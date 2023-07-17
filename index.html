@@ -11,7 +11,7 @@
         integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 
-    <!-- <link rel="shortcut icon" href="img/signo-de-interrogacion.ico">-->
+     <link rel="shortcut icon" href="img/camino.ico">
     <title>Rutas</title>
 </head>
 
@@ -83,7 +83,7 @@
       </div>
       <div class="modal-body">
         <!--Agregar dinámicamente-->
-        <form id="form-add-punto" class="formPunto">
+        <form id="form-add-punto" class="formPunto" method="POST">
           <label for="id-ruta">ID de la Ruta:</label>
           <input id="id-ruta" class="form-control form-control-sm" type="text" aria-label=".form-control-sm example"
             disabled>
@@ -93,7 +93,7 @@
 
           <input id="url-punto" class="form-control form-control-sm" type="text" placeholder="URL de imagen"
             aria-label=".form-control-sm example">
-          <button type="button" id="btn-add-punto" class="btn btn-success" data-bs-dismiss="modal">Guardar</button>
+          <button type="submit" for="form-add-punto" class="btn btn-success" data-bs-dismiss="modal">Guardar</button>
         </form>
       </div>
 

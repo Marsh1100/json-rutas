@@ -1,8 +1,8 @@
 //Importar funcion método HTTP - get -Post
-import {getRutas,newRuta,editRuta,deleteRuta,getPuntosFilter} from '../apiConnection/API.js'
+import {getRutas,newRuta,editRuta,deleteRuta,getPuntosFilter,newPunto} from '../apiConnection/API.js'
 
 //Importar selectores del DOM
-import {$secInicio,$secRutas,$inputRuta,$btnRuta,$subTitle,$tablaRutas ,$formAddRuta, $cartsPuntosList,$btnPuntoAddList,$btnPuntoVerList, $opcionesED, $listBtnOpciones, $listAddPunto, $listShowPuntos} from '../js/selectores.js'
+import {$secInicio,$secRutas,$inputRuta,$btnRuta,$subTitle,$tablaRutas ,$formAddRuta,$modalTitle,$modalBody,$modalIdRuta,$modalNombre,$modalUrl,$cartsPuntosList,$btnPuntoAddList,$btnPuntoVerList, $opcionesED, $listBtnOpciones, $listAddPunto, $listShowPuntos} from '../js/selectores.js'
 
 //1.FUNCIONES DEL CRUD RUTAS
 
@@ -12,16 +12,17 @@ export async function renderRutas(){
 
     $tablaRutas.innerHTML=" ";
 
-    listaRutas.forEach((ruta,index)=>{
+     listaRutas.forEach(async(ruta,index)=>{
         const {id,nomRuta} = ruta;
-        let contadorPuntos = contarPuntos(id); //Contar los puntos de cada RUTA 
+        let puntos =  await contarPuntos(id); //Contar los puntos de cada RUTA 
+        console.log(puntos)
         let html = `<tr>
                         <th scope="row">${index+1}</th>
                         <td>${nomRuta}</td>
                         <td>
-                            <button data-ruta="${id}" type="button" class="addPunto bi bi-plus-square" data-bs-toggle="modal" data-bs-target="#staticBackdrop"></button>
+                            <button data-ruta="${id}"  data-posicion="${index}"type="button" class="addPunto bi bi-plus-square" data-bs-toggle="modal" data-bs-target="#staticBackdrop"></button>
                         </td>
-                        <td>${contadorPuntos}</td>
+                        <td>${puntos}</td>
                         <td>
                             <button  data-ruta="${id}" data-bs-target="#p${id}" type="button" class="bi bi-eye" data-bs-toggle="collapse" aria-expanded="false" aria-controls="collapseExample"></button>
                         </td>
@@ -124,7 +125,7 @@ export function opcionesRutas(){
     habilitarBtns(true);
 }
 
-//3 FUNCIONES DE PUNTOS Create-Delete
+//3 FUNCIONES DE PUNTOS Read-Create-Delete
 //3.1 Render Puntos
 async function renderPuntos(idRuta){
 
@@ -132,7 +133,7 @@ async function renderPuntos(idRuta){
     let listaPuntosFilter = await getPuntosFilter(idRuta);
     const $cartsPunto = document.getElementById(`c${idRuta}`);
     $cartsPunto.innerHTML = " "; //Se deja vacío
-    console.log(listaPuntosFilter);
+
     listaPuntosFilter.forEach(punto=>{
         const {id,nomPunto, imagen} =punto;
         
@@ -149,6 +150,27 @@ async function renderPuntos(idRuta){
         
     });
     
+}
+
+//3.2 Añadir punto 
+
+export async function agregarPunto(e){
+    e.preventDefault();
+
+    let id = Date.now();
+    let nomPunto = $modalNombre.value;
+    let rutaId = $modalIdRuta.value;
+    let imagen = $modalUrl.value;
+    //Objeto Ruta
+    let nuevaRuta = {
+        id,
+        nomPunto,
+        rutaId,
+        imagen
+    }
+
+   await newPunto(nuevaRuta);
+
 }
 
 //0.Otras funciones
@@ -193,15 +215,26 @@ export function seleccionTabla(e){
         deleteRuta(idRuta);
 
     }else if(clase.includes("bi-plus-square")){
-
+        let posicion = parseInt(e.target.dataset.posicion)*6;
+        formularioPunto(idRuta,posicion);
     }else if(clase.includes("bi-eye")){
         renderPuntos(idRuta);
     }
 }
 
 //0.3 Contador de puntos de cada Ruta
-function contarPuntos(idPuntos){
-    return "aun no cuentaxd",idPuntos
+async function contarPuntos(idRuta){
+    //Obtener solo los puntos de una ruta específica
+    let listaPuntosFilter = await getPuntosFilter(idRuta);
+    let puntos = listaPuntosFilter.length;
+    return  puntos
+}
+
+function formularioPunto(idRuta,posicion){
+    const $tdTable = document.getElementsByTagName("td");
+    $modalTitle.textContent = $tdTable[posicion].innerHTML;
+
+    $modalIdRuta.value = idRuta;
 }
 
 
