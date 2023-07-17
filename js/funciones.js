@@ -1,5 +1,5 @@
 //Importar funcion método HTTP - get -Post
-import {getRutas,newRuta ,getPuntos} from '../apiConnection/API.js'
+import {getRutas,newRuta ,deleteRuta,getPuntos} from '../apiConnection/API.js'
 
 //Importar selectores del DOM
 import {$ruta, $tablaRutas} from '../js/selectores.js'
@@ -21,16 +21,16 @@ export async function renderRutas(){
                         <th scope="row">${index+1}</th>
                         <td>${nomRuta}</td>
                         <td>
-                            <button id="${id}" type="button" class="addPunto bi bi-plus-square" data-bs-toggle="modal" data-bs-target="#staticBackdrop"></button>
+                            <button data-ruta="${id}" type="button" class="addPunto bi bi-plus-square" data-bs-toggle="modal" data-bs-target="#staticBackdrop"></button>
                         </td>
                         <td>${17}</td>
                         <td>
-                            <button  id="v${id}" data-bs-target="#p${id}" type="button" class="bi bi-eye" data-bs-toggle="collapse" aria-expanded="false" aria-controls="collapseExample"></button>
+                            <button  data-ruta="${id}" data-bs-target="#p${id}" type="button" class="bi bi-eye" data-bs-toggle="collapse" aria-expanded="false" aria-controls="collapseExample"></button>
                         </td>
                         <td class="tdOpciones hidden">
-                            <button id="e${id}" type="button" class="btn btn-warning bi bi-pencil-square"></button>
+                            <button data-ruta="${id}" type="button" class="btn btn-warning bi bi-pencil-square"></button>
 
-                            <button id="d${id}" type="button" class="btn btn-danger bi bi-trash"></button>
+                            <button data-ruta="${id}" type="button" class="btn btn-danger bi bi-trash delete"></button>
                         </td>
                     </tr>
 
@@ -48,7 +48,7 @@ export async function renderRutas(){
             
     });
 };
-//1.2 POST - Agregar
+//1.2 POST - Agregar  Ruta
 export function agregarRuta(e){
    e.preventDefault();
 
@@ -62,6 +62,8 @@ export function agregarRuta(e){
     newRuta(nuevaRuta);
 }
 
+//1.3 --- Eliminar Ruta
+    //Ver seccion 0.2
 //2.Funcionamiento de los navbar
 //2.1
 export function listarRutas(){
@@ -102,6 +104,8 @@ export function opcionesRutas(){
     habilitarBtns(true);
 }
 
+
+
 //0.Otras funciones
 
 //0.1 Habilitar los botones editar y eliminar de cada ruta
@@ -129,6 +133,25 @@ function habilitarBtns(habilitar){
         }
 
     }
+}
+
+//0.2 Selección de botón eliminar o editar
+export function seleccionTabla(e){
+    let clase = e.target.className
+    let idRuta = parseInt(e.target.dataset.ruta);
+
+    if(clase.includes("bi-pencil-square")){
+        console.log("editar")
+    }else if(clase.includes("delete")){
+        //Confirmar delete
+        deleteRuta(idRuta)
+
+    }else if(clase.includes("bi-plus-square")){
+
+    }else if(clase.includes("bi-eye")){
+
+    }
+
 }
 
 

@@ -13,7 +13,6 @@ export const getRutas = async () => {
     }
 }
 // Insertar una nueva Ruta en la REST API - Método POST
-
 export const newRuta = async (ruta) => {
     console.log(ruta);
     try{
@@ -31,6 +30,16 @@ export const newRuta = async (ruta) => {
     }
 }
 
+// Eliminar una Ruta en la REST API - Método delete
+export const deleteRuta = async (idRuta) => {
+    try{
+        await fetch(`${urlRutas}/${idRuta}`,{
+            method: 'DELETE'
+        })
+    }catch(error){
+        console.log(error)
+    }
+}
 
 export const getPuntos = async () => {
     try {
