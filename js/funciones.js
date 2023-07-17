@@ -1,8 +1,8 @@
 //Importar funcion método HTTP - get -Post
-import {getRutas,newRuta,editRuta,deleteRuta,getPuntosFilter,newPunto} from '../apiConnection/API.js'
+import {getRutas,newRuta,editRuta,deleteRuta,getPuntosFilter,newPunto,editPuntos} from '../apiConnection/API.js'
 
 //Importar selectores del DOM
-import {$secInicio,$secRutas,$inputRuta,$btnRuta,$subTitle,$tablaRutas ,$formAddRuta,$modalTitle,$modalBody,$modalIdRuta,$modalNombre,$modalUrl,$cartsPuntosList,$btnPuntoAddList,$btnPuntoVerList, $opcionesED, $listBtnOpciones, $listAddPunto, $listShowPuntos} from '../js/selectores.js'
+import {$secInicio,$secRutas,$inputRuta,$btnRuta,$subTitle,$tablaRutas ,$formAddRuta,$modalTitle,$modalBody,$modalIdRuta,$modalNombre,$modalUrl,$formAddPunto,$cartsPuntosList,$btnPuntoAddList,$btnPuntoVerList, $opcionesED, $listBtnOpciones, $listAddPunto, $listShowPuntos} from '../js/selectores.js'
 
 //1.FUNCIONES DEL CRUD RUTAS
 
@@ -12,15 +12,13 @@ export async function renderRutas(){
 
     $tablaRutas.innerHTML=" ";
 
-     listaRutas.forEach(async(ruta,index)=>{
-        const {id,nomRuta} = ruta;
-        let puntos =  await contarPuntos(id); //Contar los puntos de cada RUTA 
-        console.log(puntos)
+     listaRutas.forEach((ruta,index)=>{
+        const {id,nomRuta,puntos} = ruta;
         let html = `<tr>
                         <th scope="row">${index+1}</th>
                         <td>${nomRuta}</td>
                         <td>
-                            <button data-ruta="${id}"  data-posicion="${index}"type="button" class="addPunto bi bi-plus-square" data-bs-toggle="modal" data-bs-target="#staticBackdrop"></button>
+                            <button data-ruta="${id}"  data-posicion="${index}" data-puntos="${puntos}" "type="button" class="addPunto bi bi-plus-square" data-bs-toggle="modal" data-bs-target="#staticBackdrop"></button>
                         </td>
                         <td>${puntos}</td>
                         <td>
@@ -57,7 +55,8 @@ export function  agregarRuta(e){
         //Nuevo objeto Ruta
         const nuevaRuta ={
             "id": Date.now(),
-            nomRuta
+            nomRuta,
+            "puntos":0
         }
         newRuta(nuevaRuta);
     }else{
@@ -156,10 +155,11 @@ async function renderPuntos(idRuta){
 
 export async function agregarPunto(e){
     e.preventDefault();
-
+    let puntos = Number(e.target.dataset.puntos);
+    console.log(puntos)
     let id = Date.now();
     let nomPunto = $modalNombre.value;
-    let rutaId = $modalIdRuta.value;
+    let rutaId = Number($modalIdRuta.value);
     let imagen = $modalUrl.value;
     //Objeto Ruta
     let nuevaRuta = {
@@ -168,8 +168,9 @@ export async function agregarPunto(e){
         rutaId,
         imagen
     }
-
    await newPunto(nuevaRuta);
+    let incrementarPunto = {"puntos":puntos+1};
+   await editPuntos(rutaId,incrementarPunto)
 
 }
 
@@ -216,6 +217,9 @@ export function seleccionTabla(e){
 
     }else if(clase.includes("bi-plus-square")){
         let posicion = parseInt(e.target.dataset.posicion)*6;
+        let puntos = parseInt(e.target.dataset.puntos);
+        $formAddPunto.setAttribute('data-puntos',puntos);
+        
         formularioPunto(idRuta,posicion);
     }else if(clase.includes("bi-eye")){
         renderPuntos(idRuta);

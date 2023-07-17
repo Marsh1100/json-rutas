@@ -5,7 +5,7 @@ const urlPuntos = "http://localhost:3000/puntos";
 //Obtener rutas de la API - (GET)
 export const getRutas = async () => {
     try {
-        const result = await fetch(urlRutas);
+        const result = await fetch(`${urlRutas}`);
         const rutas = await result.json();
         return rutas
     }catch(error){
@@ -47,6 +47,20 @@ export const editRuta = async (edicion, idRuta) => {
         await fetch(`${urlRutas}/${idRuta}`,{
             method: 'PATCH',
             body: JSON.stringify(edicion),
+            headers: {'Content-Type': 'application/json'}
+        })
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+//Editar cantidad de puntos que tiene una ruta en la RESP API - Método patch
+export const editPuntos = async (idRuta,incrementarPunto) => {
+
+    try {
+        await fetch(`${urlRutas}/${idRuta}`,{
+            method: 'PATCH',
+            body: JSON.stringify(incrementarPunto),
             headers: {'Content-Type': 'application/json'}
         })
     } catch (error) {
