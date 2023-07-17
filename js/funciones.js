@@ -4,8 +4,11 @@ import {getRutas,newRuta ,getPuntos} from '../apiConnection/API.js'
 //Importar selectores del DOM
 import {$ruta, $tablaRutas} from '../js/selectores.js'
 //Importar selectores del DOM
-import {$secInicio,$secRutas, $subTitle, $formAddRuta,$opcionesED} from '../js/selectores.js'
-//Render las rutas
+import {$secInicio,$secRutas, $subTitle, $formAddRuta,$opcionesED, $listBtnOpciones, $listAddPunto, $listShowPuntos} from '../js/selectores.js'
+
+//1.FUNCIONES DEL CRUD RUTAS
+
+//1.1 GET -Render las rutas
 export async function renderRutas(){
     const listaRutas = await getRutas();  
 
@@ -45,8 +48,7 @@ export async function renderRutas(){
             
     });
 };
-
-//Agregar nueva ruta
+//1.2 POST - Agregar
 export function agregarRuta(e){
    e.preventDefault();
 
@@ -60,7 +62,8 @@ export function agregarRuta(e){
     newRuta(nuevaRuta);
 }
 
-//Funcionamiento de los navbar
+//2.Funcionamiento de los navbar
+//2.1
 export function listarRutas(){
     $secInicio.style.display = "none";    
     $secRutas.style.display = "block";
@@ -69,8 +72,11 @@ export function listarRutas(){
 
     $subTitle.textContent="Lista de Rutas";
 
+    habilitarBtns(false);
+
 }
 
+//2.2
 export function nuevaRuta(){
     $secInicio.style.display = "none";    
     $secRutas.style.display = "block";
@@ -79,15 +85,51 @@ export function nuevaRuta(){
 
 
     $subTitle.textContent="Agregar nueva Ruta";
+    habilitarBtns(false);
+
 }
 
+//2.3
 export function opcionesRutas(){
     $secInicio.style.display = "none";    
     $secRutas.style.display = "block";
     $formAddRuta.style.display = "block";
 
     $opcionesED.style.display = "table-cell";
+
+    //Habilitar los botones editar y eliminar de cada ruta
+    habilitarBtns(true);
 }
+
+//0.Otras funciones
+
+//0.1 Habilitar los botones editar y eliminar de cada ruta
+function habilitarBtns(habilitar){
+
+    if(!habilitar){
+        for(var i = 0; i < $listBtnOpciones.length ;i++){
+            $listBtnOpciones[i].style.display="none";
+
+            //Habilita los botones agregar y ver puntos
+            $listAddPunto[i].disabled=false;
+            $listShowPuntos[i].disabled=false;
+            $listAddPunto[i].style.color="green";
+            $listShowPuntos[i].style.color="darkblue";
+        }
+    }else{
+        for(var i = 0; i < $listBtnOpciones.length ;i++){
+            $listBtnOpciones[i].style.display="table-cell";
+
+            //Deshabilita los botones agregar y ver puntos
+            $listAddPunto[i].disabled=true;
+            $listShowPuntos[i].disabled=true;
+            $listAddPunto[i].style.color="gray";
+            $listShowPuntos[i].style.color="gray";
+        }
+
+    }
+}
+
 
 
 
