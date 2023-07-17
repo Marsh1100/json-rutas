@@ -93,9 +93,10 @@ export function nuevaRuta(){
 export function opcionesRutas(){
     $secInicio.style.display = "none";    
     $secRutas.style.display = "block";
-    $formAddRuta.style.display = "block";
+    $formAddRuta.style.display = "none";
 
     $opcionesED.style.display = "table-cell";
+    $subTitle.textContent="Editar o Eliminar Rutas";
 
     //Habilitar los botones editar y eliminar de cada ruta
     habilitarBtns(true);
