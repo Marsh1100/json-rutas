@@ -100,6 +100,7 @@ export function listarRutas(){
 
 //2.2
 export function nuevaRuta(){
+    colapsarPuntos()
     $secInicio.style.display = "none";    
     $secRutas.style.display = "block";
     $formAddRuta.style.display = "block";
@@ -113,6 +114,7 @@ export function nuevaRuta(){
 
 //2.3
 export function opcionesRutas(){
+    colapsarPuntos()
     $secInicio.style.display = "none";    
     $secRutas.style.display = "block";
     $formAddRuta.style.display = "none";
@@ -236,14 +238,7 @@ export async function seleccionTabla(e){
     }
 }
 
-//0.3 Contador de puntos de cada Ruta
-async function contarPuntos(idRuta){
-    //Obtener solo los puntos de una ruta específica
-    let listaPuntosFilter = await getPuntosFilter(idRuta);
-    let puntos = listaPuntosFilter.length;
-    return  puntos
-}
-
+//0.3 Datos formulario
 function formularioPunto(idRuta,posicion){
     const $tdTable = document.getElementsByTagName("td");
     $modalTitle.textContent = $tdTable[posicion].innerHTML;
@@ -251,6 +246,13 @@ function formularioPunto(idRuta,posicion){
     $modalIdRuta.value = idRuta;
 }
 
+//0.4 Colapsar los puntos de las rutas
+function colapsarPuntos(){
+    let listClass = document.getElementsByClassName('collapse');
+    for (let i = 0; i < listClass.length; i++) {
+        listClass[i].className = "collapse";
+    }
+}
 
 
 

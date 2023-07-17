@@ -2,13 +2,8 @@
   "rutas": [
     {
       "id": 1,
-      "nomRuta": "Del sol",
-      "puntos": 4
-    },
-    {
-      "id": 2,
-      "nomRuta": "Cafetera",
-      "puntos": 1
+      "nomRuta": "Del sol 2",
+      "puntos": 3
     },
     {
       "id": 1689602891350,
@@ -18,7 +13,7 @@
     {
       "id": 1689608665127,
       "nomRuta": "Ruta 84",
-      "puntos": 0
+      "puntos": 1
     }
   ],
   "puntos": [
@@ -53,15 +48,9 @@
       "imagen": "https://img.freepik.com/vector-premium/imagen-dibujos-animados-hongo-palabra-hongo_587001-200.jpg?w=2000"
     },
     {
-      "id": 1689605108753,
-      "nomPunto": "aaa",
-      "rutaId": 2,
-      "imagen": "https://img.freepik.com/vector-premium/imagen-dibujos-animados-hongo-palabra-hongo_587001-200.jpg?w=2000"
-    },
-    {
-      "id": 1689608703502,
-      "nomPunto": "Punto2",
-      "rutaId": 1,
+      "id": 1689610029725,
+      "nomPunto": "prueba2",
+      "rutaId": 1689608665127,
       "imagen": "https://img.freepik.com/vector-premium/imagen-dibujos-animados-hongo-palabra-hongo_587001-200.jpg?w=2000"
     }
   ]
